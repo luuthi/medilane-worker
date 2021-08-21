@@ -46,7 +46,7 @@ func NewClient(cfg *config.Config) MySqlDB {
 func (obj *SqlConnector) Init(cfg *config.Config) {
 	dataSourceName := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
 		cfg.DB.User, cfg.DB.Password, cfg.DB.Host, cfg.DB.Port, cfg.DB.Name)
-
+	fmt.Println(dataSourceName)
 	db, err := gorm.Open(mysql.Open(dataSourceName), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,
