@@ -14,8 +14,8 @@ build:
     - medilane
   script:
     - ls -la
-    - docker build -t $IMAGE -f deploy/Dockerfile .
+    - docker build -t $IMAGE -f Dockerfile .
     - docker login -u $REGISTRY_USERNAME -p $REGISTRY_PWD registry.gitlab.com
     - docker push $IMAGE
   only:
-      - master
+      - main
