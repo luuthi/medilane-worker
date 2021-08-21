@@ -110,7 +110,6 @@ func (n *NotificationWorker) GetNotificationFromQueue(queueName string) string {
 	rs, err := queue.GetInstance().RPop(ctx, queueName)
 	if err != nil {
 		if err.Error() == "redis: nil" {
-			log.Info("Queue notification empty now!")
 		} else {
 			log.Errorf("Error when pop data from queue: %v", err.Error())
 		}
@@ -137,7 +136,7 @@ func (n *NotificationWorker) Run(signalChan chan os.Signal) {
 				_ = p.Invoke(data)
 			}
 			fmt.Printf("running goroutines: %d\n", p.Running())
-			time.Sleep(5 * time.Second)
+			time.Sleep(1 * time.Second)
 		}
 	}
 }
