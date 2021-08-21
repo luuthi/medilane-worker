@@ -1,0 +1,21 @@
+image: docker:latest
+services:
+  - docker:18.09-dind
+  
+stages:
+  - build
+
+variables:
+  IMAGE: registry.gitlab.com/medilane-group/medilane-worker
+
+build:
+  stage: build
+  tags: 
+    - medilane
+  script:
+    - ls -la
+    - docker build -t $IMAGE -f Dockerfile .
+    - docker login -u $REGISTRY_USERNAME -p $REGISTRY_PWD registry.gitlab.com
+    - docker push $IMAGE
+  only:
+      - main
